@@ -1,33 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Container from 'react-bootstrap/Container'
+import { CustomNavbar } from './components/CustomNavbar'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import { CustomButton } from './components/CustomButton'
+import { PencilIcon, SlidersIcon, TrashIcon } from './components/Icons'
+import { TableList } from './components/TableList'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <CustomNavbar />
+      <Container className='pt-5'>
+        <Row>
+          <Col sm={12} md={12}>
+            <div>
+              <h2>Mi tabla</h2>
+            </div>
+          </Col>
+          <Col sm={12} md={6} className='mt-3'>
+            <CustomButton variant='outline-primary'>
+              <SlidersIcon /> Filtros
+            </CustomButton>
+            <CustomButton variant='outline-primary'>
+              <PencilIcon /> Editar
+            </CustomButton>
+            <CustomButton variant='outline-danger'>
+              <TrashIcon /> Eliminar
+            </CustomButton>
+          </Col>
+          <Col sm={12} className='mt-4 d-none'>
+            {/* TODO: FiltersContent */}
+          </Col>
+        </Row>
+        <TableList></TableList>
+      </Container>
     </>
   )
 }
