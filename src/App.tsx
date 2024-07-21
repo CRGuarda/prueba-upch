@@ -5,11 +5,22 @@ import Col from 'react-bootstrap/Col'
 import { CustomButton } from './components/CustomButton'
 import { PencilIcon, SlidersIcon, TrashIcon } from './components/Icons'
 import { TableList } from './components/TableList'
+import { Await, useLoaderData } from 'react-router-dom'
+import { UsersList } from './types/random-user/users-list'
+import { Suspense } from 'react'
+import { RandomSeedButton } from './components/RandomSeedButton'
+
+type MainLoaderData = {
+  userList: UsersList
+}
 
 const App = () => {
+  const data = useLoaderData() as MainLoaderData
+
   return (
     <>
       <CustomNavbar />
+      <RandomSeedButton />
       <Container className='pt-5'>
         <Row>
           <Col sm={12} md={12}>
@@ -32,7 +43,11 @@ const App = () => {
             {/* TODO: FiltersContent */}
           </Col>
         </Row>
-        <TableList></TableList>
+        <Suspense fallback={<h3>Loading</h3>}>
+          <Await resolve={data.userList} errorElement={<h2>Error</h2>}>
+            <TableList />
+          </Await>
+        </Suspense>
       </Container>
     </>
   )

@@ -1,5 +1,4 @@
-import { Gender } from './gender.enum'
-import { ID } from './id.type'
+import { Gender } from '../enums/gender.enum'
 import { Location } from './location.type'
 import { Name } from './name.type'
 import { Picture } from './picture.type'
@@ -10,7 +9,6 @@ export type Result = {
   location: Location
   email: string
   phone: string
-  id: ID
   picture: Picture
   nat: string
 }

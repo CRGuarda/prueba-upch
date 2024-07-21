@@ -6,7 +6,7 @@ export const CustomNavbar = () => {
   return (
     <Navbar bg='dark' data-bs-theme='dark' expand='lg'>
       <Container fluid>
-        <Navbar.Brand href='#' className='mx-auto'>
+        <Navbar.Brand href='/' className='mx-auto'>
           <Image
             src='https://logo.clearbit.com/clearbit.com'
             alt='Logo de la empresa'
