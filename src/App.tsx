@@ -5,17 +5,12 @@ import Col from 'react-bootstrap/Col'
 import { CustomButton } from './components/CustomButton'
 import { PencilIcon, SlidersIcon, TrashIcon } from './components/Icons'
 import { TableList } from './components/TableList'
-import { Await, useLoaderData } from 'react-router-dom'
-import { UsersList } from './types/random-user/users-list'
-import { Suspense } from 'react'
 import { RandomSeedButton } from './components/RandomSeedButton'
-
-type MainLoaderData = {
-  userList: UsersList
-}
+import { useUsersStore } from './components/store/useUsersStore'
 
 const App = () => {
-  const data = useLoaderData() as MainLoaderData
+  const deleteUser = useUsersStore((state) => state.deleteUser)
+  const usersSelected = useUsersStore((state) => state.usersSelected)
   return (
     <>
       <CustomNavbar />
@@ -31,10 +26,10 @@ const App = () => {
             <CustomButton variant='outline-primary'>
               <SlidersIcon /> Filtros
             </CustomButton>
-            <CustomButton variant='outline-primary'>
+            <CustomButton variant='outline-primary' disabled={usersSelected.length !== 1}>
               <PencilIcon /> Editar
             </CustomButton>
-            <CustomButton variant='outline-danger'>
+            <CustomButton variant='outline-danger' onClick={() => deleteUser()} disabled={!usersSelected.length}>
               <TrashIcon /> Eliminar
             </CustomButton>
           </Col>
@@ -42,11 +37,7 @@ const App = () => {
             {/* TODO: FiltersContent */}
           </Col>
         </Row>
-        <Suspense fallback={<h3>Loading</h3>}>
-          <Await resolve={data.userList} errorElement={<h2>Error</h2>}>
-            <TableList />
-          </Await>
-        </Suspense>
+        <TableList />
       </Container>
     </>
   )

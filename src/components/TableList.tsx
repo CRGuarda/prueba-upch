@@ -3,13 +3,18 @@ import Table from 'react-bootstrap/Table'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import { SearchInput } from './SearchInput'
-import { useAsyncValue } from 'react-router-dom'
-import { UsersList } from '../types/random-user/users-list'
 import { ResultsSizeSelect } from './ResultsSizeSelect'
 import { TablePagination } from './TablePagination'
+import { useListUsers } from '../hooks/useListUsers'
+import { useUsersStore } from './store/useUsersStore'
 
 export const TableList = () => {
-  const usersList = useAsyncValue() as UsersList
+  const { usersList, isLoading } = useListUsers()
+  const setUsersSelected = useUsersStore((state) => state.setUsersSelected)
+  const usersSelected = useUsersStore((state) => state.usersSelected)
+  const selectAll = useUsersStore((state) => state.selectAll)
+
+  if (isLoading) return <h3>HOLA</h3>
   return (
     <Col className='pt-1' sm={12}>
       <Row>
@@ -29,7 +34,9 @@ export const TableList = () => {
             <thead>
               <tr>
                 <th scope='col'>
-                  <i className='bi bi-check-lg'></i>
+                  <i className='bi bi-check-lg'>
+                    <input className='form-check-input' type='checkbox' onChange={(e) => selectAll(e.target.checked)} />
+                  </i>
                 </th>
                 <th scope='col'></th>
                 <th scope='col'>Nombre</th>
@@ -43,14 +50,20 @@ export const TableList = () => {
               </tr>
             </thead>
             <tbody>
-              {usersList.map(({ name, gender, address, phone, email, country, picture }) => {
+              {usersList?.map(({ name, gender, address, phone, email, country, picture }) => {
+                const a = usersSelected.some((item) => item === name)
                 return (
                   <tr key={name}>
                     <th scope='row'>
-                      <input className='form-check-input' type='checkbox' value='' />
+                      <input
+                        className='form-check-input'
+                        type='checkbox'
+                        checked={a}
+                        onChange={() => setUsersSelected(name)}
+                      />
                     </th>
                     <td>
-                      <Image src={picture} alt={`Picture of ${name}`} roundedCircle width={36} />
+                      <Image src={picture} alt={`Picture of ${name}`} roundedCircle height={36} />
                     </td>
 
                     <td>{name}</td>
