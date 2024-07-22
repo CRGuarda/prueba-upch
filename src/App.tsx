@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col'
 import { CustomButton } from './components/CustomButton'
 import { PencilIcon, SlidersIcon, TrashIcon } from './components/Icons'
 import { TableList } from './components/TableList'
-import { Await, useLoaderData, useSearchParams } from 'react-router-dom'
+import { Await, useLoaderData } from 'react-router-dom'
 import { UsersList } from './types/random-user/users-list'
 import { Suspense } from 'react'
 import { RandomSeedButton } from './components/RandomSeedButton'
@@ -16,8 +16,6 @@ type MainLoaderData = {
 
 const App = () => {
   const data = useLoaderData() as MainLoaderData
-  const [searchParams] = useSearchParams()
-  const hola = searchParams.get('results')
   return (
     <>
       <CustomNavbar />
@@ -45,7 +43,7 @@ const App = () => {
           </Col>
         </Row>
         <Suspense fallback={<h3>Loading</h3>}>
-          <Await resolve={data.userList} errorElement={<h2>Error</h2>} key={hola}>
+          <Await resolve={data.userList} errorElement={<h2>Error</h2>}>
             <TableList />
           </Await>
         </Suspense>
