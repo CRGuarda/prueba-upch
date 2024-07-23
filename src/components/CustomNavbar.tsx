@@ -11,6 +11,7 @@ export const CustomNavbar = () => {
             src='https://logo.clearbit.com/clearbit.com'
             alt='Logo de la empresa'
             className='d-inline-block align-text-top'
+            title='Inicio'
             height={30}
           />
         </Navbar.Brand>

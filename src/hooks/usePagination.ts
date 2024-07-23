@@ -1,23 +1,18 @@
 import { useSearchParams } from 'react-router-dom'
-import { validatePage } from '../lib/search-params/validate-page'
+import { validatePage } from '../utils/search-params/validate-page'
 
 export const usePagination = () => {
+  const pageKey = 'page'
   const [searchParams, setSearchParams] = useSearchParams()
-  const currentPage = validatePage(searchParams.get('page'))
+  const currentPage = validatePage(searchParams.get(pageKey))
   const handlePrev = () => {
-    const currentSearchParams = Object.fromEntries(searchParams)
-    setSearchParams({
-      ...currentSearchParams,
-      page: (currentPage - 1).toString(),
-    })
+    searchParams.set(pageKey, (currentPage - 1).toString())
+    return setSearchParams(searchParams)
   }
 
   const handleNext = () => {
-    const currentSearchParams = Object.fromEntries(searchParams)
-    setSearchParams({
-      ...currentSearchParams,
-      page: (currentPage + 1).toString(),
-    })
+    searchParams.set(pageKey, (currentPage + 1).toString())
+    return setSearchParams(searchParams)
   }
 
   const isPrevDisabled = currentPage <= 1

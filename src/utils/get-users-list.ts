@@ -3,8 +3,9 @@ import { UsersList } from '../types/random-user/users-list'
 import { toCapitalize } from './to-capitalize'
 
 export const getUsersList = (usersList: Result[]): UsersList =>
-  usersList.map(({ picture, name, gender, location, phone, email, nat }) => {
+  usersList.map(({ id, picture, name, gender, location, phone, email, nat }) => {
     return {
+      id: id.name + id.value,
       name: name.first + ' ' + name.last,
       picture: picture.large,
       gender: toCapitalize(gender),

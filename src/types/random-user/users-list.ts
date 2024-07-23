@@ -1,4 +1,5 @@
 export type UsersList = {
+  id: string
   picture: string
   name: string
   gender: string

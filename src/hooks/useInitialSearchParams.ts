@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
-import { validateResults } from '../lib/search-params/validate-results'
-import { validatePage } from '../lib/search-params/validate-page'
+import { validateResults } from '../utils/search-params/validate-results'
+import { validatePage } from '../utils/search-params/validate-page'
 
 export const useInitialSearchParams = () => {
   const [searchParams] = useSearchParams()

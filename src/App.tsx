@@ -11,6 +11,7 @@ import { useUsersStore } from './components/store/useUsersStore'
 const App = () => {
   const deleteUser = useUsersStore((state) => state.deleteUser)
   const usersSelected = useUsersStore((state) => state.usersSelected)
+  const toggleEditable = useUsersStore((state) => state.toggleEditable)
   return (
     <>
       <CustomNavbar />
@@ -22,11 +23,15 @@ const App = () => {
               <h2>Mi tabla</h2>
             </div>
           </Col>
-          <Col sm={12} md={6} className='mt-3'>
+          <Col sm={12} md={6} className='mt-3 text-center text-lg-start'>
             <CustomButton variant='outline-primary'>
               <SlidersIcon /> Filtros
             </CustomButton>
-            <CustomButton variant='outline-primary' disabled={usersSelected.length !== 1}>
+            <CustomButton
+              variant='outline-primary'
+              disabled={usersSelected.length !== 1}
+              onClick={() => toggleEditable()}
+            >
               <PencilIcon /> Editar
             </CustomButton>
             <CustomButton variant='outline-danger' onClick={() => deleteUser()} disabled={!usersSelected.length}>

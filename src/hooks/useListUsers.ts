@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { RandomUser } from '../types/random-user/random-user.type'
-import { getUsersList } from '../lib/get-users-list'
+import { getUsersList } from '../utils/get-users-list'
 import { useInitialSearchParams } from './useInitialSearchParams'
 import { useUsersStore } from '../components/store/useUsersStore'
 

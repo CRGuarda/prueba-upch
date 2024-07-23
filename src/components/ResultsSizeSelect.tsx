@@ -4,12 +4,9 @@ import { useSearchParams } from 'react-router-dom'
 
 export const ResultsSizeSelect = () => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const currentParams = Object.fromEntries(searchParams)
-    return setSearchParams({
-      ...currentParams,
-      [e.target.name]: e.target.value,
-    })
+  const handleChange = ({ target }: ChangeEvent<HTMLSelectElement>) => {
+    searchParams.set(target.name, target.value)
+    return setSearchParams(searchParams)
   }
   return (
     <label>
