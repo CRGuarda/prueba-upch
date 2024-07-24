@@ -11,3 +11,4 @@ Se tomó algunas libertades:
 - Estoy manejando los usuarios random bajo una seed (se agregó la forma de escoger otra seed dinámica), esto para mantener una consistencia al momento de la paginación.
 - La API pública no devuelve los géneros filtrados cuando se agrega una seed, esto se tuvo que gestionar a nivel de aplicación pero siempre guiándose de los parámetros de la URL.
 - El ícono del navbar lleva '/', sin parámetros. Es una forma de limpiar los parámetros escogidos.
+- Me tomé la libertad para agregar el favicon de UPCH
