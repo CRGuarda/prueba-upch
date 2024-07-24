@@ -3,26 +3,34 @@ import { UsersList } from '../../types/random-user/users-list'
 import { ascSortElements, descSortElements } from '../../utils/sort-elements'
 
 type UsersStore = {
-  isEditableEnabled: boolean
-  toggleEditable: () => void
-  editUser: (userId: string, newValue: string, propertyName: keyof UsersList[number]) => void
   initialUsersList: UsersList
   usersList: UsersList
-  setUsersList: (usersList: UsersList) => void
-  deleteUser: () => void
   usersSelected: string[]
-  setUsersSelected: (id: string) => void
-  selectAll: (toggleSelect: boolean) => void
-  searchUser: (searchInput: string | null) => void
-  sortUserList: (key: keyof UsersList[number]) => void
+  isEditableEnabled: boolean
+  isFilterOpen: boolean
+  setIsFilterOpen: () => void
   sortKey: {
     key?: keyof UsersList[number]
     order?: 'asc' | 'desc'
   }
+  toggleEditable: () => void
+  editUser: (userId: string, newValue: string, propertyName: keyof UsersList[number]) => void
+  setUsersList: (usersList: UsersList) => void
+  deleteUser: () => void
+  setUsersSelected: (id: string) => void
+  selectAll: (toggleSelect: boolean) => void
+  searchUser: (searchInput: string | null) => void
+  sortUserList: (key: keyof UsersList[number]) => void
 }
 
 export const useUsersStore = create<UsersStore>()((set, get) => ({
+  initialUsersList: [],
+  usersList: [],
+  usersSelected: [],
   isEditableEnabled: false,
+  isFilterOpen: false,
+  sortKey: {},
+  setIsFilterOpen: () => set((state) => ({ isFilterOpen: !state.isFilterOpen })),
   toggleEditable: () => set((state) => ({ isEditableEnabled: !state.isEditableEnabled })),
   editUser: (userId, newValue, propertyName) => {
     const { initialUsersList, usersList } = get()
@@ -39,10 +47,6 @@ export const useUsersStore = create<UsersStore>()((set, get) => ({
       usersList: usersListClone,
     })
   },
-  initialUsersList: [],
-  usersList: [],
-  usersSelected: [],
-  sortKey: {},
   searchUser: (searchInput) => {
     set(({ initialUsersList }) => ({
       usersList: searchInput

@@ -32,7 +32,6 @@ p {
 .data-table-wrapper {
   max-height: 300px;
   overflow: auto;
-  margin-bottom: 1.2rem;
 }
 
 .table > :not(:first-child) {

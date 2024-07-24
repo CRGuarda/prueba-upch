@@ -25,12 +25,17 @@ export const EditableField = ({ isEditable, value, propertyName, userId }: Edita
 
   if (!isInputEditable) return <span>{value}</span>
   return (
-    <input
-      type='text'
-      className='form-control form-control-sm'
-      value={inputValue}
-      onChange={handleChange}
-      onKeyDown={handleEnter}
-    />
+    <div>
+      <input
+        type='text'
+        className='form-control form-control-sm'
+        value={inputValue}
+        onChange={handleChange}
+        onKeyDown={handleEnter}
+      />
+      <span style={{ color: 'gray', fontSize: '9px' }}>
+        <kbd style={{ fontSize: '7.5px' }}>Enter</kbd> para guardar
+      </span>
+    </div>
   )
 }

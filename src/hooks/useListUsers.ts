@@ -16,16 +16,16 @@ export const useListUsers = () => {
     const controller = new AbortController()
     axios
       .get<RandomUser>(
-        `https://randomuser.me/api/?inc=id,picture,name,gender,location,phone,email,nat&nat=${nat}&page=${page}&results=${results}&seed=${seed}&gender=${
-          gender || ''
-        }`,
+        `https://randomuser.me/api/?inc=id,picture,name,gender,location,phone,email,nat&nat=${nat}&page=${page}&results=${results}&seed=${seed}`,
         {
           signal: controller.signal,
         }
       )
       .then(({ data }) => {
         const usersListFormatted = getUsersList(data.results)
-        setUsersList(usersListFormatted)
+        setUsersList(
+          usersListFormatted.filter((user) => (gender ? user.gender.toLowerCase() === gender.toLowerCase() : user))
+        )
         setIsLoading(false)
       })
 

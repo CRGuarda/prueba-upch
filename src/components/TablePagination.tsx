@@ -4,10 +4,14 @@ import { usePagination } from '../hooks/usePagination'
 export const TablePagination = () => {
   const { currentPage, handlePrev, handleNext, isPrevDisabled, isNextDisabled } = usePagination()
   return (
-    <Pagination>
-      <Pagination.Prev as='button' disabled={isPrevDisabled} onClick={handlePrev} />
+    <Pagination className='justify-content-end pt-1'>
+      <Pagination.Prev as='button' disabled={isPrevDisabled} onClick={handlePrev}>
+        Anterior
+      </Pagination.Prev>
       <Pagination.Item active>{currentPage}</Pagination.Item>
-      <Pagination.Next as='button' disabled={isNextDisabled} onClick={handleNext} />
+      <Pagination.Next as='button' disabled={isNextDisabled} onClick={handleNext}>
+        Siguiente
+      </Pagination.Next>
     </Pagination>
   )
 }
